@@ -21,7 +21,7 @@ def pert(tasks, dependencies):
             "variance": float(variance),
             "standard_deviation": float(standard_deviation),
             "earliest_start": 0,
-            "latest_start": 26,
+            "latest_start": 25,
             "earliest_finish": float(expected_time),
             "latest_finish": 31,
             "slack": 0
@@ -77,4 +77,6 @@ results = pert(tasks, dependencies)
 #Print the results
 results_df = pd.DataFrame.from_dict(results, orient='index')
 print(results_df)
+
+results_df.to_csv('results.csv')
 
