@@ -77,3 +77,5 @@ results = pert(tasks, dependencies)
 # Print the Results
 results_df = pd.DataFrame.from_dict(results, orient='index')
 print(results_df)
+
+results_df.to_csv('personal_results.csv')
