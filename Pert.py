@@ -21,35 +21,37 @@ def pert(tasks, dependencies):
             "variance": float(variance),
             "standard_deviation": float(standard_deviation),
             "earliest_start": 0,
-            "latest_start": 25,
+            "latest_start": 31,
             "earliest_finish": float(expected_time),
             "latest_finish": 31,
             "slack": 0
         }
 
+    dependencies = {key: [dep] if isinstance(dep, str) else dep for key, dep in dependencies.items()}
     #Calculate the earliest start and earliest finish of each task
     for _ in range(len(task_data)):
-        for task, dependent_tasks in dependencies.items():
-            for dependent_task in dependent_tasks:
-                if task_data[task]["earliest_finish"] < task_data[dependent_task]["earliest_start"]:
-                    task_data[dependent_task]["earliest_start"] = task_data[task]["earliest_finish"] 
-                task_data[dependent_task]["earliest_finish"] = max(
-                    task_data[dependent_task]["earliest_start"] + task_data[dependent_task]["expected_time"], 
-                    task_data[task]["earliest_finish"])
+        for task in task_data:
+            if task in dependencies:
+                earliest_start = max([task_data[dep]["earliest_finish"] for dep in dependencies[task]], default=0)
+                task_data[task]["earliest_start"] = earliest_start
+                task_data[task]["earliest_finish"] = earliest_start + task_data[task]["expected_time"]
 
-    # Calculate the latest start, latest finish and slack of each task
-    for task in reversed(sorted(task_data, key=lambda x: task_data[x]["earliest_finish"])):
-        if not dependencies.get(task):
-            task_data[task]["latest_finish"] = task_data[task]["earliest_finish"]
-            task_data[task]["latest_start"] = task_data[task]["latest_finish"] - task_data[task]["expected_time"]
-        for dependent_task in dependencies.get(task, []):
-            task_data[dependent_task]["latest_finish"] = min(
-                task_data[dependent_task]["latest_finish"], 
-                task_data[task]["latest_start"]
-            )
-            task_data[dependent_task]["latest_start"] = task_data[dependent_task]["latest_finish"] - task_data[dependent_task]["expected_time"]
-            task_data[dependent_task]["slack"] = task_data[dependent_task]["latest_start"] - task_data[dependent_task]["earliest_start"]
-            task_data[dependent_task]["slack"] = round(task_data[dependent_task]["slack"], 2)
+    project_duration = max(task_data[task]["earliest_finish"] for task in task_data)
+
+
+    for task in task_data:
+        task_data[task]["latest_finish"] = project_duration
+
+    # Calculate the latest start, finish and slack of each task
+    for _ in range(len(task_data)):
+        for task in task_data:
+            if task not in dependencies or not dependencies[task]:
+                continue
+            for dep in dependencies[task]:
+                task_data[dep]["latest_finish"] = min(task_data[dep]["latest_finish"], task_data[task]["earliest_start"])
+                task_data[dep]["latest_start"] = task_data[dep]["latest_finish"] - task_data[dep]["expected_time"]
+                task_data[dep]["slack"] = task_data[dep]["latest_start"] - task_data[dep]["earliest_start"]
+
 
     return task_data
 
@@ -71,6 +73,7 @@ dependencies = {
     "D": "B",
     "E": "C",
     "F": "D",
+    "G":[],
 }
 
 results = pert(tasks, dependencies)
