@@ -8,14 +8,16 @@ def pert(tasks, dependencies):
     for task, times in tasks.items():
         O, P, M = times
         expected_time = (O + M*4 + P)/6
-        float(expected_time)
-        expected_time = round(expected_time, 2)
         variance = ((P-O)**2)/36
-        float(variance)
-        variance = round(variance, 2)
         standard_deviation = math.sqrt(variance)
+        # Convert to float and round to two
+        float(expected_time)
+        float(variance)
         float(standard_deviation)
+        expected_time = round(expected_time, 2)
+        variance = round(variance, 2)
         standard_deviation = round(standard_deviation, 2)
+        # Add the task data to the currently empty dictionary
         task_data[task] = {
             "expected_time": float(expected_time),
             "variance": float(variance),
@@ -26,6 +28,7 @@ def pert(tasks, dependencies):
             "latest_finish": 31,
             "slack": 0
         }
+
 
     dependencies = {key: [dep] if isinstance(dep, str) else dep for key, dep in dependencies.items()}
     #Calculate the earliest start and earliest finish of each task
@@ -42,7 +45,7 @@ def pert(tasks, dependencies):
     for task in task_data:
         task_data[task]["latest_finish"] = project_duration
 
-    # Calculate the latest start, latest finish and slack of each task
+    # Calculate the latest start, finish and slack of each task
     for _ in range(len(task_data)):
         for task in task_data:
             if task not in dependencies or not dependencies[task]:
@@ -55,7 +58,7 @@ def pert(tasks, dependencies):
 
     return task_data
 
-#Definir las tareas
+#Define the tasks
 tasks = {}
 dependencies = {}
 number_of_tasks = int(input("Enter the number of tasks you have: "))
@@ -66,7 +69,7 @@ for i in range(number_of_tasks):
     most_likely_time = float(input("Enter the most likely time: "))
     tasks[task] = [optimistic_time, pessimistic_time, most_likely_time]
 
-# Definir las dependencias de cada tarea
+# Define the dependencies of each task
 for task in tasks:
     number_of_dependencies = int(input(f"Enter the number of dependencies of task {task}: "))
     dependencies[task] = []

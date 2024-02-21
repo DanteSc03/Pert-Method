@@ -2,20 +2,23 @@
 import math
 import pandas as pd
 
+
 def pert(tasks, dependencies):
     task_data={}
     #Calculate the expected time, variance and standard deviation of each task
     for task, times in tasks.items():
         O, P, M = times
         expected_time = (O + M*4 + P)/6
-        float(expected_time)
-        expected_time = round(expected_time, 2)
         variance = ((P-O)**2)/36
-        float(variance)
-        variance = round(variance, 2)
         standard_deviation = math.sqrt(variance)
+        # Convert to float and round to two
+        float(expected_time)
+        float(variance)
         float(standard_deviation)
+        expected_time = round(expected_time, 2)
+        variance = round(variance, 2)
         standard_deviation = round(standard_deviation, 2)
+        # Add the task data to the currently empty dictionary
         task_data[task] = {
             "expected_time": float(expected_time),
             "variance": float(variance),
@@ -26,6 +29,7 @@ def pert(tasks, dependencies):
             "latest_finish": 31,
             "slack": 0
         }
+
 
     dependencies = {key: [dep] if isinstance(dep, str) else dep for key, dep in dependencies.items()}
     #Calculate the earliest start and earliest finish of each task
@@ -73,7 +77,6 @@ dependencies = {
     "D": "B",
     "E": "C",
     "F": "D",
-    "G":[],
 }
 
 results = pert(tasks, dependencies)
