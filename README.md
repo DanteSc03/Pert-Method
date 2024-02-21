@@ -18,11 +18,11 @@ The PERT analysis tool calculates several key metrics for project management, in
 1. Define your tasks and their optimistic (o), pessimistic (p), and most likely (m) time estimates.
 2. Define the dependencies between the tasks.
 3. Run the `pert` function to get the analysis results.
-4. The `Pert.py` is intended to be an comprehensive example
-5. Running `pert` in `Pert-Interactive.py` allows you to customize your tasks, the quantity of tasks and the dependencies
+4. The `Pert.py` file is intended to be a comprehensive example.
+5. Running `pert` in `Pert-Interactive.py` allows you to customize your tasks, the quantity of tasks and the dependencies.
 
-## Required Libraries 
-Make sure to run the following in the command line before running the code
+## Requirements
+Pandas is necessary to run the files in this respository
 ```python 
 pip install pandas
 ```
