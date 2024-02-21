@@ -47,7 +47,8 @@ def pert(tasks, dependencies):
             )
             task_data[dependent_task]["latest_start"] = task_data[dependent_task]["latest_finish"] - task_data[dependent_task]["expected_time"]
             task_data[dependent_task]["slack"] = task_data[dependent_task]["latest_start"] - task_data[dependent_task]["earliest_start"]
-
+            task_data[dependent_task]["slack"] = round(task_data[dependent_task]["slack"], 2)
+            
     return task_data
 
 #Definir las tareas
