@@ -22,6 +22,7 @@ The PERT analysis tool calculates several key metrics for project management, in
 5. Running `pert` in `Pert-Interactive.py` allows you to customize your tasks, the quantity of tasks and the dependencies.
 
 ## Requirements
+Run in the command line
 ```python 
 pip install pandas
 ```
