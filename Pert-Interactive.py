@@ -23,9 +23,9 @@ def pert(tasks, dependencies):
             "variance": float(variance),
             "standard_deviation": float(standard_deviation),
             "earliest_start": 0,
-            "latest_start": 31,
+            "latest_start": None,
             "earliest_finish": float(expected_time),
-            "latest_finish": 31,
+            "latest_finish": None,
             "slack": 0
         }
 
