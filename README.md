@@ -26,7 +26,7 @@ The PERT analysis tool calculates several key metrics for project management, in
 
 ## Code Example
 
-# For Pert-Interactive.py
+### For Pert-Interactive.py
 ```python
 import math
 
@@ -51,7 +51,7 @@ for task, data in results.items():
     # ... [Rest of your print statements]
 ```
 
-# For Pert.py
+### For Pert.py
 ```python
 import math
 
