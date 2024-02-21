@@ -1,9 +1,10 @@
 
 import math
+import pandas as pd
 
 def pert(tasks, dependencies):
     task_data={}
-    #Calcular el tiempo esperado de cada tarea y su variance
+    #Calculate the expected time, variance and standard deviation of each task
     for task, times in tasks.items():
         O, P, M = times
         expected_time = (O + M*4 + P)/6
@@ -26,7 +27,7 @@ def pert(tasks, dependencies):
             "slack": 0
         }
 
-    #Calcular el empiezo mas temprano y el termino mas temprano de cada tarea
+    #Calculate the earliest start and earliest finish of each task
     for _ in range(len(task_data)):
         for task, dependent_tasks in dependencies.items():
             for dependent_task in dependent_tasks:
@@ -34,7 +35,7 @@ def pert(tasks, dependencies):
                     task_data[dependent_task]["earliest_start"] = task_data[task]["earliest_finish"] 
                 task_data[dependent_task]["earliest_finish"] = max(task_data[dependent_task]["earliest_start"] + task_data[dependent_task]["expected_time"], task_data[task]["earliest_finish"])
 
-    #Calcular el empiezo mas tarde, el termino mas tarde y la slack de cada tarea
+    # Calculate the latest start, latest finish and slack of each task
     for task in reversed(sorted(task_data, key=lambda x: task_data[x]["earliest_finish"])):
         if not dependencies.get(task):
             task_data[task]["latest_finish"] = task_data[task]["earliest_finish"]
@@ -49,17 +50,17 @@ def pert(tasks, dependencies):
 
     return task_data
 
-#Definir las tareas
+#Define the tasks
 tasks = {
-    "A": (2, 7, 5),
-    "B": (3, 6, 4),
-    "C": (5, 8, 6),
-    "D": (1, 6, 4),
-    "E": (2, 7, 5),
-    "F": (3, 6, 4),
+    "A": (2, 9, 5),
+    "B": (3, 10, 4),
+    "C": (5, 12, 6),
+    "D": (1, 13, 4),
+    "E": (2, 9, 5),
+    "F": (3, 8, 4),
 }
 
-# Definir las dependencias de cada tarea
+# Define the dependencies
 dependencies = {
     "A": [],
     "B": ["A"],
@@ -71,16 +72,8 @@ dependencies = {
 
 results = pert(tasks, dependencies)
 
-print(results)
 
-for task, data in results.items():
-    print(f"Task: {task}")
-    print(f"Expected Time: {data['expected_time']}")
-    print(f"Variance: {data['variance']}")
-    print(f"Standard Deviation: {data['standard_deviation']}")
-    print(f"Earliest Start: {data['earliest_start']}")
-    print(f"Latest Start: {data['latest_start']}")
-    print(f"Earliest Finish: {data['earliest_finish']}")
-    print(f"Latest Finish: {data['latest_finish']}")
-    print(f"Slack: {data['slack']}")
-    print("\n")
+#Print the results
+results_df = pd.DataFrame.from_dict(results, orient='index')
+print(results_df)
+
