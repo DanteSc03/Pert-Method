@@ -31,9 +31,11 @@ def pert(tasks, dependencies):
     for _ in range(len(task_data)):
         for task, dependent_tasks in dependencies.items():
             for dependent_task in dependent_tasks:
-                if task_data[task]["earliest_start"] < task_data[dependent_task]["earliest_finish"]:
+                if task_data[task]["earliest_finish"] < task_data[dependent_task]["earliest_start"]:
                     task_data[dependent_task]["earliest_start"] = task_data[task]["earliest_finish"] 
-                task_data[dependent_task]["earliest_finish"] = max(task_data[dependent_task]["earliest_start"] + task_data[dependent_task]["expected_time"], task_data[task]["earliest_finish"])
+                task_data[dependent_task]["earliest_finish"] = max(
+                    task_data[dependent_task]["earliest_start"] + task_data[dependent_task]["expected_time"], 
+                    task_data[task]["earliest_finish"])
 
     # Calculate the latest start, latest finish and slack of each task
     for task in reversed(sorted(task_data, key=lambda x: task_data[x]["earliest_finish"])):
