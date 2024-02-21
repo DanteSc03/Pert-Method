@@ -51,9 +51,9 @@ dependencies = {
 
 results = pert(tasks, dependencies)
 
-for task, data in results.items():
-    print(f"Tarea: {task}")
-    # ... [Rest of your print statements]
+#Print the results
+results_df = pd.DataFrame.from_dict(results, orient='index')
+print(results_df)
 ```
 
 #### For Pert.py
@@ -79,9 +79,9 @@ dependencies = {
 
 results = pert(tasks, dependencies)
 
-for task, data in results.items():
-    print(f"Tarea: {task}")
-    # ... [Rest of your print statements]
+#Print the results
+results_df = pd.DataFrame.from_dict(results, orient='index')
+print(results_df)
 ```
 
 ## Contributing
