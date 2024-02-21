@@ -31,7 +31,7 @@ def pert(tasks, dependencies):
     for _ in range(len(task_data)):
         for task, dependent_tasks in dependencies.items():
             for dependent_task in dependent_tasks:
-                if task_data[task]["earliest_start"] < task_data[dependent_task]["earliest_finish"]:
+                if task_data[task]["earliest_finish"] < task_data[dependent_task]["earliest_start"]:
                     task_data[dependent_task]["earliest_start"] = task_data[task]["earliest_finish"] 
                 task_data[dependent_task]["earliest_finish"] = max(task_data[dependent_task]["earliest_start"] + task_data[dependent_task]["expected_time"], task_data[task]["earliest_finish"])
 
@@ -48,7 +48,7 @@ def pert(tasks, dependencies):
             task_data[dependent_task]["latest_start"] = task_data[dependent_task]["latest_finish"] - task_data[dependent_task]["expected_time"]
             task_data[dependent_task]["slack"] = task_data[dependent_task]["latest_start"] - task_data[dependent_task]["earliest_start"]
             task_data[dependent_task]["slack"] = round(task_data[dependent_task]["slack"], 2)
-            
+
     return task_data
 
 #Definir las tareas
