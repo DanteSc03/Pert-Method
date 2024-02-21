@@ -82,12 +82,13 @@ dependencies = {
     "G": ["E", "F"],
 }
 
+
 results = pert(tasks, dependencies)
 
 
 #Print the results
 results_df = pd.DataFrame.from_dict(results, orient='index')
 print(results_df)
-
+#save to csv file
 results_df.to_csv('results.csv')
 

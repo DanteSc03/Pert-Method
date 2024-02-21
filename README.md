@@ -73,7 +73,7 @@ tasks = {
 
 dependencies = {
     "A": [],
-    "B": ["A"],
+    "B": [],
     # ... [Rest of your dependencies]
 }
 
