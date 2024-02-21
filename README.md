@@ -20,8 +20,9 @@ The PERT analysis tool calculates several key metrics for project management, in
 3. Run the `pert` function to get the analysis results.
 
 ## Required Libraries 
+Make sure to run the following in the command line before running the code
 ```python 
-
+pip install pandas
 ```
 
 ## Code Example
@@ -29,6 +30,7 @@ The PERT analysis tool calculates several key metrics for project management, in
 ### For Pert-Interactive.py
 ```python
 import math
+import pandas as pd
 
 def pert(tasks, dependencies):
     # ... [Include the entire PERT function code here]
@@ -54,6 +56,7 @@ for task, data in results.items():
 ### For Pert.py
 ```python
 import math
+import pandas as pd
 
 def pert(tasks, dependencies):
     # ... [Include the entire PERT function code here]
