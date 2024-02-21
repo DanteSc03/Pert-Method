@@ -21,9 +21,9 @@ def pert(tasks, dependencies):
             "variance": float(variance),
             "standard_deviation": float(standard_deviation),
             "earliest_start": 0,
-            "latest_start": 30,
+            "latest_start": 26,
             "earliest_finish": float(expected_time),
-            "latest_finish": 30,
+            "latest_finish": 31,
             "slack": 0
         }
 
@@ -47,15 +47,16 @@ def pert(tasks, dependencies):
             )
             task_data[dependent_task]["latest_start"] = task_data[dependent_task]["latest_finish"] - task_data[dependent_task]["expected_time"]
             task_data[dependent_task]["slack"] = task_data[dependent_task]["latest_start"] - task_data[dependent_task]["earliest_start"]
+            task_data[dependent_task]["slack"] = round(task_data[dependent_task]["slack"], 2)
 
     return task_data
 
 #Define the tasks
 tasks = {
-    "A": (2, 9, 5),
+    "A": (2, 8, 5),
     "B": (3, 10, 4),
-    "C": (5, 12, 6),
-    "D": (1, 13, 4),
+    "C": (5, 10, 6),
+    "D": (1, 10, 4),
     "E": (2, 9, 5),
     "F": (3, 8, 4),
 }
@@ -63,11 +64,11 @@ tasks = {
 # Define the dependencies
 dependencies = {
     "A": [],
-    "B": ["A"],
-    "C": ["B"],
-    "D": ["B"],
-    "E": ["C"],
-    "F": ["D","E"],
+    "B": [],
+    "C": "A",
+    "D": "B",
+    "E": "C",
+    "F": "D",
 }
 
 results = pert(tasks, dependencies)
