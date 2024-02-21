@@ -19,10 +19,15 @@ The PERT analysis tool calculates several key metrics for project management, in
 2. Define the dependencies between the tasks.
 3. Run the `pert` function to get the analysis results.
 
+## Required Libraries 
+```python 
+
+```
+
 ## Code Example
 
+# For Pert-Interactive.py
 ```python
-For Pert-Interactive.py
 import math
 
 def pert(tasks, dependencies):
@@ -46,9 +51,8 @@ for task, data in results.items():
     # ... [Rest of your print statements]
 ```
 
-
+# For Pert.py
 ```python
-For Pert.py
 import math
 
 def pert(tasks, dependencies):
