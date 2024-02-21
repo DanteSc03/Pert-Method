@@ -1,7 +1,7 @@
 
 # 🔧PERT Analysis Tool🔧
 
-This repository contains a Python implementation of the Program Evaluation and Review Technique (PERT), a widely used tool in project management for planning and scheduling tasks.
+This repository contains a Python implementation of the Program Evaluation and Review Technique (PERT), a widely used tool in project management for planning and scheduling tasks. We made this work for the subject of optimization for business analytics in order to analyze and understand the method and to be able to calculate an example.
 
 ## ➕Description
 
