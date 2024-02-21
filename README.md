@@ -1,9 +1,9 @@
 
-# PERT Analysis Tool
+# 🔧PERT Analysis Tool🔧
 
 This repository contains a Python implementation of the Program Evaluation and Review Technique (PERT), a widely used tool in project management for planning and scheduling tasks.
 
-## Description
+## ➕Description
 
 The PERT analysis tool calculates several key metrics for project management, including:
 
@@ -13,7 +13,7 @@ The PERT analysis tool calculates several key metrics for project management, in
 - Earliest and latest finish times for each task.
 - Slack time for each task, indicating the flexibility in scheduling.
 
-## How to Use
+## How to Use❓
 
 1. Define your tasks and their optimistic (o), pessimistic (p), and most likely (m) time estimates.
 2. Define the dependencies between the tasks.
