@@ -55,6 +55,7 @@ def pert(tasks, dependencies):
                 task_data[dep]["latest_finish"] = min(task_data[dep]["latest_finish"], task_data[task]["earliest_start"])
                 task_data[dep]["latest_start"] = task_data[dep]["latest_finish"] - task_data[dep]["expected_time"]
                 task_data[dep]["slack"] = task_data[dep]["latest_start"] - task_data[dep]["earliest_start"]
+                task_data[dep]["slack"] = round(task_data[dep]["slack"], 2)
 
 
     return task_data
@@ -67,6 +68,7 @@ tasks = {
     "D": (1, 10, 4),
     "E": (2, 9, 5),
     "F": (3, 8, 4),
+    "G": (4, 10, 6),
 }
 
 # Define the dependencies
@@ -77,6 +79,7 @@ dependencies = {
     "D": "B",
     "E": ["C"],
     "F": ["D"],
+    "G": ["E", "F"],
 }
 
 results = pert(tasks, dependencies)
