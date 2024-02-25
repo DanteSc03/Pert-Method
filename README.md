@@ -28,6 +28,11 @@ pip install pandas
 ```
 Pandas is necessary to run the files in this respository
 
+```python
+brew install graphviz
+```
+graphviz is required to create the graph within this repository
+
 ## Code Example
 
 #### For Pert-Interactive.py
