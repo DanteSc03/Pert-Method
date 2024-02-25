@@ -1,0 +1,22 @@
+digraph {
+	A [label="A
+Expected time: 5.0 (SD: 1.0)"]
+	B [label="B
+Expected time: 4.83 (SD: 1.17)"]
+	C [label="C
+Expected time: 6.5 (SD: 0.83)"]
+	D [label="D
+Expected time: 4.5 (SD: 1.5)"]
+	E [label="E
+Expected time: 5.17 (SD: 1.17)"]
+	F [label="F
+Expected time: 4.5 (SD: 0.83)"]
+	G [label="G
+Expected time: 6.33 (SD: 1.0)"]
+	A -> C [label=5.0]
+	B -> D [label=4.83]
+	C -> E [label=6.5]
+	D -> F [label=4.5]
+	E -> G [label=5.17]
+	F -> G [label=4.5]
+}

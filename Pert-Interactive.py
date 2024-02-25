@@ -1,6 +1,7 @@
 
 import math
 import pandas as pd
+from graphviz import Digraph
 
 def pert(tasks, dependencies):
     task_data={}
@@ -58,6 +59,21 @@ def pert(tasks, dependencies):
 
     return task_data
 
+
+def create_pert_graph(task_data):
+    dot = Digraph()
+
+    for task, data in task_data.items():
+        dot.node(task, label=f"{task}\nExpected time: {data['expected_time']} (SD: {data['standard_deviation']})")
+
+    for task, deps in dependencies.items():
+        for dep in deps:
+            label = str(task_data[dep]['expected_time'])
+            dot.edge(dep, task, label=label)
+
+    return dot
+
+
 #Define the tasks
 tasks = {}
 dependencies = {}
@@ -79,7 +95,8 @@ for task in tasks:
 
 results = pert(tasks, dependencies)
 
-
+pert_graph = create_pert_graph(results)
+pert_graph.render("pert_graph.png")
 
 # Print the Results
 results_df = pd.DataFrame.from_dict(results, orient='index')
