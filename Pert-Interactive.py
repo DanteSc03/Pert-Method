@@ -96,7 +96,7 @@ for task in tasks:
 results = pert(tasks, dependencies)
 
 pert_graph = create_pert_graph(results)
-pert_graph.render("pert_graph.png")
+pert_graph.render("pert_graph_interactive.png")
 
 # Print the Results
 results_df = pd.DataFrame.from_dict(results, orient='index')
